@@ -1,0 +1,4 @@
+Teams*[1-5] sets*finalMatchSetDistribution
+South Dakota (0-1)*16*25*20*20*1
+Northwestern (1-0)*25*20*25*25*3
+~

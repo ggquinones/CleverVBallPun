@@ -9,9 +9,41 @@ def GetAllTables():
 	soup = BeautifulSoup(html,'html.parser')
 	return soup.find_all("div",class_="stats-fullbox clearfix")
 
+def GetTeamResultArray(teamResultsHTML):
+	resultsArray =[]
+	ct =0
+	for td in teamResultsHTML:
+		if ct%2 != 0:
+			resultsArray.append(td.string)
+		ct+=1;
+	return resultsArray
+
+def ProcessResultsTable(resultTable):
+	header = ["Teams","[1-5] sets","finalMatchSetDistribution"]	
+	team1Result = GetTeamResultArray(resultTable.contents[3])
+	team2Result = GetTeamResultArray(resultTable.contents[5])
+	fw = open("test.txt","w+")
+	fw.write("*".join(header)+"\n") # * delimits td 
+	fw.write("*".join(team1Result)+"\n")
+	fw.write("*".join(team2Result)+"\n")
+	fw.write("~") # Delimits tables
+	fw.close()
+	
+
+		
+	
 
 sauce = GetAllTables()
-print(len(sauce))
-print(sauce[0].table) # Overview Table
-print(sauce[1].table) # Home team boxscore
-print(sauce[2].table) # Away team boxscore
+ProcessResultsTable(sauce[0].table) # sauce[0] is top results table on the page
+#print(sauce[1].table) # Home? team boxscore
+#print(sauce[2].table) # Away? team boxscore
+fw = open("BS_test.txt","w+")
+# [1]= team name row at top
+team1BS = sauce[1].table.contents[5]
+#print(team1BS)
+#GetTeamBoxscore(sauce[1].table) STOPPING POINT IS THIS FUNCTION
+
+
+
+
+
