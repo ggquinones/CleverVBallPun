@@ -29,8 +29,8 @@ def ProcessResultsTable(resultTable):
 	fw.write("~") # Delimits tables
 	fw.close()
 	
-
-		
+def GetTeamBoxscore(boxscoreHTML):
+	print(boxscoreHTML)	
 	
 
 sauce = GetAllTables()
@@ -38,11 +38,22 @@ ProcessResultsTable(sauce[0].table) # sauce[0] is top results table on the page
 #print(sauce[1].table) # Home? team boxscore
 #print(sauce[2].table) # Away? team boxscore
 fw = open("BS_test.txt","w+")
-# [1]= team name row at top
-team1BS = sauce[1].table.contents[5]
-#print(team1BS)
-#GetTeamBoxscore(sauce[1].table) STOPPING POINT IS THIS FUNCTION
 
+team1Name = sauce[1].table.contents[1]
+# [2] is empty row, [3] is Attack, Serve, Block header which I don't want
+boxscoreHeader = sauce[1].table.contents[5]
+
+team1BS = sauce[1].table.contents[7]
+#print(ord(sauce[1].table.contents[2]) == 10) Empty rows ar LF characters (linefeeds)
+for tr in team1BS:
+	try:
+		tagText = tr.string
+		
+		print(tagText.strip())
+	except:
+		print("Error handled : "+tr.text)
+#fw.write(sauce[2].table)
+#fw.close()
 
 
 
