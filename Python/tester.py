@@ -8,7 +8,7 @@ def WriteResultsTableToFile(table):
 	for tr in table:
 		row=""
 		for td in tr.findChildren():
-			row+= td.string.strip()+ " "
+			row+= td.string.strip()+ ", "
 		fw.write(row +"\n")
 	fw.write("~\n") #To delimit from team1 boxscore table
 	fw.close()
@@ -20,7 +20,7 @@ def WriteTeamTableToFile(teamBS):
 		for td in tr.findChildren():
 			if td.string is not None:
 				line = td.string.replace("*","")
-				row+= line.strip()+" "
+				row+= line.strip()+", "
 		fw.write(row +"\n")
 	fw.write("~\n") #To delimit boxscore tables
 	fw.close()
