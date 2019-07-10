@@ -19,7 +19,8 @@ def WriteTeamTableToFile(teamBS):
 		row=""
 		for td in tr.findChildren():
 			if td.string is not None:
-				row+= td.string.strip()+" "
+				line = td.string.replace("*","")
+				row+= line.strip()+" "
 		fw.write(row +"\n")
 	fw.write("~\n") #To delimit boxscore tables
 	fw.close()
@@ -35,4 +36,4 @@ team2BS = stuff[2].find("table").findAll("tr")
 
 WriteResultsTableToFile(results)
 WriteTeamTableToFile(team1BS)
-#WriteTeamTableToFile(team2BS) #Doesnt work for team2 for some reason dig into that
+WriteTeamTableToFile(team2BS) #Doesnt work for team2 for some reason dig into that
